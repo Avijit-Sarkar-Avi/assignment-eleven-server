@@ -33,20 +33,6 @@ async function run() {
             res.send(service);
         });
 
-        // app.get('/orders', async (req, res) => {
-        //     const query = {};
-        //     const cursor = orderCollection.find(query);
-        //     const orders = await cursor.toArray();
-        //     res.send(orders);
-        // });
-
-        // app.get('/orders/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { service: id };
-        //     const order = await orderCollection.findOne(query);
-        //     res.send(order);
-        // });
-
         app.get('/orders', async (req, res) => {
             let query = {};
             if (req.query.service) {
