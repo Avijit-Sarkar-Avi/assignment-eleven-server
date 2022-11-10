@@ -32,6 +32,16 @@ async function run() {
             res.send(service);
         });
 
+        //added data
+        app.post('/services', async (req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
+            res.send(result);
+        });
+
+
+
+
         //for service id
         app.get('/orders', async (req, res) => {
             let query = {};
