@@ -11,7 +11,6 @@ app.use(express.json());
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.bkopbwy.mongodb.net/?retryWrites=true&w=majority`;
-console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
@@ -33,6 +32,7 @@ async function run() {
             res.send(service);
         });
 
+        //for service id
         app.get('/orders', async (req, res) => {
             let query = {};
             if (req.query.service) {
@@ -43,6 +43,20 @@ async function run() {
             const cursor = orderCollection.find(query);
             const orders = await cursor.toArray();
             res.send(orders)
+        });
+
+        //for email
+        app.get('/order', async (req, res) => {
+
+            let query = {};
+            if (req.query.email) {
+                query = {
+                    email: req.query.email
+                }
+            }
+            const cursor = orderCollection.find(query);
+            const orders = await cursor.toArray();
+            res.send(orders);
         });
 
         app.post('/orders', async (req, res) => {
